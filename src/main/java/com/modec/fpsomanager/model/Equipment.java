@@ -156,6 +156,10 @@ public class Equipment implements Serializable {
 			throw new BusinessException("Invalid Equipment Code");
 		}
 
+		if (StringUtils.isBlank(dto.getName())) {
+			throw new BusinessException("Invalid Equipment Name");
+		}
+
 		if (StringUtils.isBlank(dto.getLocation())) {
 			throw new BusinessException("Invalid Equipment Location");
 		}

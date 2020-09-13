@@ -95,7 +95,7 @@ public class EquipmentService {
 		final List<Equipment> equipments = new ArrayList<>();
 		equipmentPutRequest//
 				.getCodes()//
-				.parallelStream()//
+				.stream()//
 				.filter(Objects::nonNull).forEach(item -> {
 					final String value = item.trim().toUpperCase();
 					final Optional<Equipment> optEquipment = this.equipmentRepository.findByCode(value);
