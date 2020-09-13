@@ -9,6 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.modec.fpsomanager.dto.VesselDTO;
+import com.modec.fpsomanager.exception.BusinessException;
+
 @Entity
 @Table(name = "FPSO_VESSEL")
 public class Vessel implements Serializable {
@@ -26,6 +31,11 @@ public class Vessel implements Serializable {
 	public Vessel(final int id, final String vesselRegistryCode) {
 		super();
 		this.id = id;
+		this.vesselRegistryCode = vesselRegistryCode;
+	}
+
+	public Vessel(final String vesselRegistryCode) {
+		super();
 		this.vesselRegistryCode = vesselRegistryCode;
 	}
 
@@ -52,6 +62,18 @@ public class Vessel implements Serializable {
 	@Override
 	public String toString() {
 		return String.format("Vessel [id=%s, vesselRegistryCode=%s]", this.id, this.vesselRegistryCode);
+	}
+
+	public static Vessel fromDTO(final VesselDTO vesselDTO) {
+		if (vesselDTO == null || StringUtils.isBlank(vesselDTO.getCode())) {
+			throw new BusinessException("Invalid vessel data");
+		}
+
+		return new Vessel(vesselDTO.getCode().toUpperCase().trim());
+	}
+
+	public VesselDTO toDTO() {
+		return new VesselDTO(this.getVesselRegistryCode());
 	}
 
 }
