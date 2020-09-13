@@ -14,16 +14,24 @@ public class EquipmentDTO implements Serializable {
 
 	private String equipmentStatus;
 
+	private String location;
+
 	public EquipmentDTO() {
 		super();
 	}
 
-	public EquipmentDTO(final String name, final String code, final VesselDTO vessel, final String equipmentStatus) {
+	public EquipmentDTO(//
+			final String name, //
+			final String code, //
+			final VesselDTO vessel, //
+			final String equipmentStatus, //
+			final String location) {
 		super();
 		this.name = name;
 		this.code = code;
 		this.vessel = vessel;
 		this.equipmentStatus = equipmentStatus;
+		this.location = location;
 	}
 
 	public String getName() {
@@ -61,11 +69,20 @@ public class EquipmentDTO implements Serializable {
 	@Override
 	public String toString() {
 		return String.format(//
-				"EquipmentDTO [name=%s, code=%s, vessel=%s, equipmentStatus=%s]", //
+				"EquipmentDTO [name=%s, code=%s, vessel=%s, equipmentStatus=%s, location=%s]", //
 				this.name, //
 				this.code, //
 				this.vessel, //
-				this.equipmentStatus);
+				this.equipmentStatus, //
+				this.location);
+	}
+
+	public String getLocation() {
+		return this.location;
+	}
+
+	public void setLocation(final String location) {
+		this.location = location;
 	}
 
 }

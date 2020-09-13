@@ -30,6 +30,13 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 
 	}
 
+	@ExceptionHandler(BusinessException.class)
+	public final ResponseEntity<Object> handleBusinessException(final Exception ex, final WebRequest request) {
+		final ExceptionResponse exceptionResponse = this.getDefaultResponse(ex, request);
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+
+	}
+
 	private ExceptionResponse getDefaultResponse(final Exception ex, final WebRequest request) {
 		return new ExceptionResponse(//
 				new Date(), //

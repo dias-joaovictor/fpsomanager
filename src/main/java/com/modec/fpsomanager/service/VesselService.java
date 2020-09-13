@@ -30,7 +30,7 @@ public class VesselService {
 					vessel.getVesselRegistryCode()));
 		}
 
-		return this.vesselRepository.save(vessel).toDTO();
+		return this.vesselRepository.saveAndFlush(vessel).toDTO();
 	}
 
 	public List<VesselDTO> findAll() {
@@ -52,6 +52,10 @@ public class VesselService {
 				.orElseThrow(() -> new EntityNotFoundException(
 						MessageFormat.format("There is no vessel with registry code {0}", code)))//
 				.toDTO();
+	}
+
+	public VesselRepository getVesselRepository() {
+		return this.vesselRepository;
 	}
 
 }
